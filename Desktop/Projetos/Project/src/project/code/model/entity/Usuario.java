@@ -1,4 +1,4 @@
-package project.code.model;
+package project.code.model.entity;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
-import project.code.exception.SetsException;
+import project.code.exception.PersistenciaException;
 
 public class Usuario {
 
@@ -17,9 +17,9 @@ public class Usuario {
         return user;
     }
 
-    public void setUsuario(String user) throws SetsException {
+    public void setUsuario(String user) throws PersistenciaException {
         if (user.isEmpty()) {
-            throw new SetsException("Invalid user");
+            throw new PersistenciaException("User invalido.");
         }
         this.user = user;
     }
@@ -76,6 +76,6 @@ public class Usuario {
     }
 
     public String persistir() {
-        return getUser() + "," + getHashedPassword();
+        return getUsuario() + "," + getHashedPassword();
     }
 }

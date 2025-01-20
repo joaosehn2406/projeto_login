@@ -9,9 +9,9 @@ package project.code.exception;
  *
  * @author jpssa
  */
-public class SetsException extends Exception{
+public class PersistenciaException extends Exception{
     
-    public SetsException(String msg) {
+    public PersistenciaException(String msg) {
         super(msg);
     }
 }
