@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package project.code.view;
+package code.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import project.code.exception.PersistenciaException;
-import project.code.model.entity.Usuario;
-import project.code.model.repository.UsuarioController;
+import code.exception.PersistenciaException;
+import code.model.entity.Usuario;
+import code.model.repository.UsuarioController;
 
 /**
  *
@@ -28,6 +28,7 @@ public class LoginInicial extends javax.swing.JDialog {
 
         try {
             initComponents();
+            getContentPane().setBackground(java.awt.Color.WHITE);
             controller = new UsuarioController();
 
             usuarios = controller.read(controller.FILE_PATH);
@@ -49,61 +50,88 @@ public class LoginInicial extends javax.swing.JDialog {
     private void initComponents() {
 
         tfUsuario = new javax.swing.JTextField();
-        tfSenha = new javax.swing.JTextField();
         btLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfCadastro = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tfSenha = new javax.swing.JPasswordField();
+        btCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btLogin.setText("Login");
+        tfUsuario.setForeground(new java.awt.Color(187, 168, 68));
+
+        btLogin.setBackground(new java.awt.Color(187, 182, 84));
+        btLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btLogin.setForeground(new java.awt.Color(0, 20, 22));
+        btLogin.setText("Entrar");
         btLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btLoginActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Usuario");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(187, 182, 84));
+        jLabel1.setText("Login");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(187, 182, 84));
         jLabel2.setText("Senha");
 
-        tfCadastro.setText("Cadastrar");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/img/cadeado.jpg"))); // NOI18N
+
+        btCadastrar.setBackground(new java.awt.Color(187, 182, 84));
+        btCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btCadastrar.setForeground(new java.awt.Color(0, 12, 6));
+        btCadastrar.setText("Cadastrar");
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btLogin)
-                        .addGap(27, 27, 27)
-                        .addComponent(tfCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(tfSenha)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                        .addGap(81, 81, 81)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btCadastrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addComponent(tfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                .addComponent(tfUsuario))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addComponent(jLabel4)))
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(62, 62, 62)
+                .addComponent(jLabel4)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btLogin)
-                    .addComponent(tfCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,21 +146,28 @@ public class LoginInicial extends javax.swing.JDialog {
 
             String username = tfUsuario.getText().trim();
             String password = tfSenha.getText().trim();
-            
-         
+
             if (username.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Username and password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
+
             usuario.setSenha(password);
             usuario.setUsuario(username);
             usuarios.add(usuario);
             controller.save(usuarios);
-        } 
-        catch (PersistenciaException e) {
+        } catch (PersistenciaException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btLoginActionPerformed
+
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+        // TODO add your handling code here:
+
+        CadastroUsuario cadastroUsuario = new CadastroUsuario(null, true);
+        cadastroUsuario.setLocationRelativeTo(this);
+        cadastroUsuario.setVisible(true);
+
+    }//GEN-LAST:event_btCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,11 +212,12 @@ public class LoginInicial extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField tfCadastro;
-    private javax.swing.JTextField tfSenha;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField tfSenha;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 }

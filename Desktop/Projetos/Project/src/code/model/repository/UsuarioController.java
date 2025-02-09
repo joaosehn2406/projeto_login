@@ -1,10 +1,11 @@
-package project.code.model.repository;
+package code.model.repository;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import project.code.exception.PersistenciaException;
-import project.code.model.entity.Usuario;
+import code.exception.PersistenciaException;
+import code.model.entity.TipoUsuario;
+import code.model.entity.Usuario;
 
 public class UsuarioController {
 
@@ -39,7 +40,10 @@ public class UsuarioController {
                 Usuario user = new Usuario();
                 user.setUsuario(data[0]);
                 user.setSenha(data[1]);
-
+                user.setNome(data[2]);
+                user.setEmail(data[3]);
+                user.setTipoUsuario(TipoUsuario.valueOf(data[4]));
+    
                 users.add(user);
             }
         } catch (IOException e) {
