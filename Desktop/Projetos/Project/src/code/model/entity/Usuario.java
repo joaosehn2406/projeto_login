@@ -31,7 +31,7 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
@@ -39,7 +39,7 @@ public class Usuario {
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
-    
+
     public String getUsuario() {
         return user;
     }
@@ -62,11 +62,20 @@ public class Usuario {
         this.senha = s;
     }
 
+    public boolean validarColunas(String nome, String email, String senha, String usuario, TipoUsuario tp){
+        return !nome.isEmpty() && 
+                !email.isEmpty() && 
+                !senha.isEmpty() && 
+                !usuario.isEmpty() && 
+                tp != null;
+    }
+
+
     public String persistir() {
-        return getUsuario() + "," + 
-                getSenha() + "," + 
-                getNome() + "," + 
-                getEmail() + "," + 
-                getUsuario();
+        return getUsuario() + ","
+                + getSenha() + ","
+                + getNome() + ","
+                + getEmail() + ","
+                + getTipoUsuario();
     }
 }

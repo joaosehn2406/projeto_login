@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import code.exception.PersistenciaException;
+import code.model.auth.AuthService;
 import code.model.entity.Usuario;
 import code.model.repository.UsuarioController;
+import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -34,7 +37,7 @@ public class LoginInicial extends javax.swing.JDialog {
             usuarios = controller.read(controller.FILE_PATH);
 
         } catch (PersistenciaException e) {
-            usuarios = new ArrayList<>();
+
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
@@ -142,22 +145,39 @@ public class LoginInicial extends javax.swing.JDialog {
 
         try {
 
-            Usuario usuario = new Usuario();
+            String usuario = tfUsuario.getText().trim();
+            String senha = new String(tfSenha.getPassword()).trim();
 
-            String username = tfUsuario.getText().trim();
-            String password = tfSenha.getText().trim();
+            if (AuthService.usuarioExistente(usuario, controller.FILE_PATH)) {
 
-            if (username.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Username and password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                if (AuthService.validarLogin(senha, usuario, controller.FILE_PATH)) {
+
+                    JOptionPane.showMessageDialog(null, "Bem vindo " + usuario + "!");
+                }
+            } else {
+
+                int resposta = JOptionPane.showConfirmDialog(
+                        this,
+                        "Usuário não encontrado. Deseja criar um?", 
+                        "Confirmação", 
+                        JOptionPane.YES_NO_OPTION 
+                );
+
+                if (resposta == JOptionPane.YES_OPTION) {
+                   
+                    CadastroUsuario cadastroUsuario = new CadastroUsuario(null, true);
+                    cadastroUsuario.setLocationRelativeTo(this);
+                    cadastroUsuario.setVisible(true);
+                }
+
             }
 
-            usuario.setSenha(password);
-            usuario.setUsuario(username);
-            usuarios.add(usuario);
-            controller.save(usuarios);
-        } catch (PersistenciaException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
         }
+        catch(InputMismatchException e) {
+            
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_btLoginActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed

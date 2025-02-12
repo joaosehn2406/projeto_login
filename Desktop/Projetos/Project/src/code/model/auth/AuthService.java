@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 public class AuthService {
 
     public static boolean validarLogin(String password, String user, String path) {
-        String pass = hashSHA256(password);
+        String pass = PasswordCripto.hashSHA256(password);
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -56,20 +56,23 @@ public class AuthService {
         return false;
     }
 
-    public static String hashSHA256(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(password.getBytes());
-
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hashBytes) {
-                hexString.append(String.format("%02x", b));
+    public static boolean validarSenha(String senha, String path) {
+    
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String dados[] = linha.split(",");
+                
+                if (dados[1].trim().equals(senha.trim())) {
+                    return true;
+                }
             }
-
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Erro ao gerar hash SHA-256", e);
         }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
     }
 
 }

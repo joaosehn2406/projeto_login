@@ -5,6 +5,8 @@
 package code.view;
 
 import code.exception.PersistenciaException;
+import code.model.auth.AuthService;
+import code.model.auth.PasswordCripto;
 import code.model.entity.TipoUsuario;
 import code.model.entity.Usuario;
 import code.model.repository.UsuarioController;
@@ -21,6 +23,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
     private List<Usuario> usuarios;
     private UsuarioController controller;
+
     /**
      * Creates new form CadastroUsuario
      */
@@ -89,7 +92,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
                             .addComponent(tfUsuario)
                             .addComponent(tfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
+                        .addGap(90, 90, 90)
                         .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -146,6 +149,11 @@ public class CadastroUsuario extends javax.swing.JDialog {
         );
 
         btCadastrar.setText("Cadastrar");
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarActionPerformed(evt);
+            }
+        });
 
         btVoltar.setText("Voltar");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -188,9 +196,50 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         // TODO add your handling code here:
-        
+
         this.setVisible(false);
     }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+        // TODO add your handling code here:
+
+        try {
+
+            Usuario usuario = new Usuario();
+
+            String username = tfUsuario.getText().trim();
+            String password = PasswordCripto.hashSHA256(tfSenha.getText().trim());
+            String nome = tfNome.getText().trim();
+            String email = tfEmail.getText().trim();
+            TipoUsuario selecionado = (TipoUsuario) cbTipoUsuario.getSelectedItem();
+            
+
+            if (usuario.validarColunas(nome, email, email, email, selecionado)) {
+
+                usuario.setSenha(password);
+                usuario.setUsuario(username);
+                usuario.setEmail(email);
+                usuario.setNome(nome);
+                usuario.setTipoUsuario(selecionado);
+
+                usuarios.add(usuario);
+                controller.save(usuarios);
+
+                JOptionPane.showMessageDialog(null, "Usuario Cadastrado!");
+                tfUsuario.setText("");
+                tfEmail.setText("");
+                tfNome.setText("");
+                tfSenha.setText("");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Informacoes Erradas");
+                
+            }
+
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
