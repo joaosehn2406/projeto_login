@@ -33,6 +33,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
             getContentPane().setBackground(java.awt.Color.WHITE);
             controller = new UsuarioController();
 
+            this.setLocationRelativeTo(null);
             usuarios = controller.read(controller.FILE_PATH);
 
         } catch (PersistenciaException e) {

@@ -31,6 +31,8 @@ public class LoginInicial extends javax.swing.JDialog {
 
         try {
             initComponents();
+            
+            this.setLocationRelativeTo(null);
             getContentPane().setBackground(java.awt.Color.WHITE);
             controller = new UsuarioController();
 
@@ -144,7 +146,8 @@ public class LoginInicial extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         try {
-
+            
+            
             String usuario = tfUsuario.getText().trim();
             String senha = new String(tfSenha.getPassword()).trim();
 
@@ -177,6 +180,7 @@ public class LoginInicial extends javax.swing.JDialog {
             
             e.printStackTrace();
         }
+        
 
     }//GEN-LAST:event_btLoginActionPerformed
 
