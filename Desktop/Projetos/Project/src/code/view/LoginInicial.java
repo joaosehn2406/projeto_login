@@ -10,8 +10,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import code.exception.PersistenciaException;
 import code.model.auth.AuthService;
-import code.model.entity.Usuario;
-import code.model.repository.UsuarioController;
+import code.model.entity.User.TipoUsuario;
+import code.model.entity.User.UsuarioPadrao;
+import code.model.entity.User.UsuarioRoot;
+import code.model.repository.UsuarioPadraoController;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 
@@ -21,8 +23,9 @@ import java.util.InputMismatchException;
  */
 public class LoginInicial extends javax.swing.JDialog {
 
-    private List<Usuario> usuarios;
-    private UsuarioController controller;
+    private List<UsuarioPadrao> usuarios;
+    private UsuarioPadraoController controller;
+    private UsuarioRoot root = new UsuarioRoot();
 
     /**
      * Creates new form LoginInicial
@@ -31,10 +34,12 @@ public class LoginInicial extends javax.swing.JDialog {
 
         try {
             initComponents();
+            UsuarioRoot.criarUsuarioRoot();
+            
             
             this.setLocationRelativeTo(null);
             getContentPane().setBackground(java.awt.Color.WHITE);
-            controller = new UsuarioController();
+            controller = new UsuarioPadraoController();
 
             usuarios = controller.read(controller.FILE_PATH);
 
@@ -61,6 +66,7 @@ public class LoginInicial extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         tfSenha = new javax.swing.JPasswordField();
         btCadastrar = new javax.swing.JButton();
+        btnVerSenha = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,12 +102,25 @@ public class LoginInicial extends javax.swing.JDialog {
             }
         });
 
+        btnVerSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/img/olho_fechado.png"))); // NOI18N
+        btnVerSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnVerSenhaMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnVerSenhaMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -113,11 +132,10 @@ public class LoginInicial extends javax.swing.JDialog {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1)
                                 .addComponent(tfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                                .addComponent(tfUsuario))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel4)))
-                .addGap(80, 80, 80))
+                                .addComponent(tfUsuario)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVerSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,12 +149,14 @@ public class LoginInicial extends javax.swing.JDialog {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,11 +207,33 @@ public class LoginInicial extends javax.swing.JDialog {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         // TODO add your handling code here:
 
-        CadastroUsuario cadastroUsuario = new CadastroUsuario(null, true);
-        cadastroUsuario.setLocationRelativeTo(this);
-        cadastroUsuario.setVisible(true);
-
+            String usuarioAtual = tfUsuario.getText();
+            
+            if(AuthService.validarTipoUsuario(usuarioAtual, controller.FILE_PATH)) {
+            
+                 CadastroUsuario cadastroUsuario = new CadastroUsuario(null, true);
+                cadastroUsuario.setLocationRelativeTo(this);
+                cadastroUsuario.setVisible(true);
+                
+            }
+            
     }//GEN-LAST:event_btCadastrarActionPerformed
+
+    private void btnVerSenhaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerSenhaMousePressed
+        // TODO add your handling code here:
+        
+        tfSenha.setEchoChar((char) 0);
+        
+        btnVerSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/img/olho.png")));
+    }//GEN-LAST:event_btnVerSenhaMousePressed
+
+    private void btnVerSenhaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerSenhaMouseReleased
+        // TODO add your handling code here:
+        
+        tfSenha.setEchoChar('•');
+        
+        btnVerSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/img/olho_fechado.png")));
+    }//GEN-LAST:event_btnVerSenhaMouseReleased
 
     /**
      * @param args the command line arguments
@@ -234,10 +276,13 @@ public class LoginInicial extends javax.swing.JDialog {
             }
         });
     }
+    
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btLogin;
+    private javax.swing.JButton btnVerSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

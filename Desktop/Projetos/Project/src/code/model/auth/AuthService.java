@@ -4,6 +4,7 @@
  */
 package code.model.auth;
 
+import code.model.entity.User.TipoUsuario;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -72,6 +73,28 @@ public class AuthService {
             e.printStackTrace();
         }
         
+        return false;
+    }
+    
+    public static boolean validarTipoUsuario(String nomeUsuario, String path) {
+    
+        try(BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String linha;
+            while((linha = br.readLine()) != null) {
+                String dados[] = linha.split(",");
+                
+                String user = dados[0].trim();
+                String tipoUsuarioArmazenado = dados[4].trim();
+                
+                if(user.equals(nomeUsuario) && tipoUsuarioArmazenado.equals(TipoUsuario.ADMIN)) {
+                
+                    return true;
+                }
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
         return false;
     }
 

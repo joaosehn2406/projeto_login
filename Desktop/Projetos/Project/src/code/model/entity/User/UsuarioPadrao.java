@@ -1,5 +1,6 @@
-package code.model.entity;
+package code.model.entity.User;
 
+import code.model.entity.User.TipoUsuario;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,14 +8,28 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 import code.exception.PersistenciaException;
+import code.model.entity.Persi;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class Usuario {
+public class UsuarioPadrao implements Persi{
 
+    public final static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    
     private String user;
     private String senha;
     private String nome;
     private String email;
     private TipoUsuario tipoUsuario;
+    private Date dt_criacao;
+
+    public Date getDt_criacao() {
+        return dt_criacao;
+    }
+
+    public void setDt_criacao(Date dt_criacao) {
+        this.dt_criacao = new Date();
+    }
 
     public String getNome() {
         return nome;
@@ -70,12 +85,13 @@ public class Usuario {
                 tp != null;
     }
 
-
+    @Override
     public String persistir() {
         return getUsuario() + ","
                 + getSenha() + ","
                 + getNome() + ","
                 + getEmail() + ","
-                + getTipoUsuario();
+                + getTipoUsuario() + "," 
+                + (dt_criacao != null ? sdf.format(dt_criacao) : ""); 
     }
 }

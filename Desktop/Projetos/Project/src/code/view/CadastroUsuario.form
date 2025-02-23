@@ -140,6 +140,9 @@
               <Connection code="new DefaultComboBoxModel&lt;&gt;(TipoUsuario.values())" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTipoUsuarioActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TipoUsuario&gt;"/>
           </AuxValues>

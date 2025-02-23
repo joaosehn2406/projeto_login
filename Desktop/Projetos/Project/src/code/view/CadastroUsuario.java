@@ -7,9 +7,9 @@ package code.view;
 import code.exception.PersistenciaException;
 import code.model.auth.AuthService;
 import code.model.auth.PasswordCripto;
-import code.model.entity.TipoUsuario;
-import code.model.entity.Usuario;
-import code.model.repository.UsuarioController;
+import code.model.entity.User.TipoUsuario;
+import code.model.entity.User.UsuarioPadrao;
+import code.model.repository.UsuarioPadraoController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -21,8 +21,8 @@ import javax.swing.JOptionPane;
  */
 public class CadastroUsuario extends javax.swing.JDialog {
 
-    private List<Usuario> usuarios;
-    private UsuarioController controller;
+    private List<UsuarioPadrao> usuarios;
+    private UsuarioPadraoController controller;
 
     /**
      * Creates new form CadastroUsuario
@@ -31,7 +31,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
         try {
             initComponents();
             getContentPane().setBackground(java.awt.Color.WHITE);
-            controller = new UsuarioController();
+            controller = new UsuarioPadraoController();
 
             this.setLocationRelativeTo(null);
             usuarios = controller.read(controller.FILE_PATH);
@@ -78,6 +78,11 @@ public class CadastroUsuario extends javax.swing.JDialog {
         Senha.setText("Senha");
 
         cbTipoUsuario.setModel(new DefaultComboBoxModel<>(TipoUsuario.values()));
+        cbTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -206,14 +211,13 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
         try {
 
-            Usuario usuario = new Usuario();
+            UsuarioPadrao usuario = new UsuarioPadrao();
 
             String username = tfUsuario.getText().trim();
             String password = PasswordCripto.hashSHA256(tfSenha.getText().trim());
             String nome = tfNome.getText().trim();
             String email = tfEmail.getText().trim();
             TipoUsuario selecionado = (TipoUsuario) cbTipoUsuario.getSelectedItem();
-            
 
             if (usuario.validarColunas(nome, email, email, email, selecionado)) {
 
@@ -234,13 +238,23 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Informacoes Erradas");
-                
+
             }
 
         } catch (PersistenciaException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btCadastrarActionPerformed
+
+    private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+
+        cbTipoUsuario.addItem(null);
+        for (TipoUsuario tipo : TipoUsuario.values()) {
+            cbTipoUsuario.addItem(tipo);
+        }
+        cbTipoUsuario.setSelectedItem(null);
+    }//GEN-LAST:event_cbTipoUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

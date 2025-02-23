@@ -4,17 +4,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import code.exception.PersistenciaException;
-import code.model.entity.TipoUsuario;
-import code.model.entity.Usuario;
+import code.model.entity.User.TipoUsuario;
+import code.model.entity.User.UsuarioPadrao;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class UsuarioController {
-
+public class UsuarioPadraoController {
 
     public final static String FILE_PATH = "C:\\Temp\\usuarios.csv";
 
-    public void save(List<Usuario> users) throws PersistenciaException {
+    public void save(List<UsuarioPadrao> users) throws PersistenciaException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (Usuario user : users) {
+            for (UsuarioPadrao user : users) {
                 bw.write(user.persistir());
                 bw.newLine();
             }
@@ -24,8 +26,8 @@ public class UsuarioController {
     }
 
 
-    public List<Usuario> read(String caminho) throws PersistenciaException {
-        List<Usuario> users = new ArrayList<>();
+    public List<UsuarioPadrao> read(String caminho) throws PersistenciaException {
+        List<UsuarioPadrao> users = new ArrayList<>();
 
         File file = new File(FILE_PATH);
         if (!file.exists()) {
@@ -37,17 +39,20 @@ public class UsuarioController {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
 
-                Usuario user = new Usuario();
+                UsuarioPadrao user = new UsuarioPadrao();
                 user.setUsuario(data[0]);
                 user.setSenha(data[1]);
                 user.setNome(data[2]);
                 user.setEmail(data[3]);
                 user.setTipoUsuario(TipoUsuario.valueOf(data[4]));
+                user.setDt_criacao(UsuarioPadrao.sdf.parse(data[5]));
     
                 users.add(user);
             }
         } catch (IOException e) {
             throw new PersistenciaException("Erro ao ler o arquivo: " + e.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(UsuarioPadraoController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return users;
