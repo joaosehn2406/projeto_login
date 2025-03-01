@@ -1,6 +1,6 @@
 package code.model.entity.User;
 
-import code.model.entity.User.TipoUsuario;
+import code.model.enums.TipoUsuario;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,11 +8,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 import code.exception.PersistenciaException;
-import code.model.entity.Persi;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import code.model.entity.Serializavel;
 
-public class UsuarioPadrao implements Persi{
+public class UsuarioPadrao implements Serializavel{
 
     public final static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
@@ -86,7 +86,7 @@ public class UsuarioPadrao implements Persi{
     }
 
     @Override
-    public String persistir() {
+    public String toCSV() {
         return getUsuario() + ","
                 + getSenha() + ","
                 + getNome() + ","

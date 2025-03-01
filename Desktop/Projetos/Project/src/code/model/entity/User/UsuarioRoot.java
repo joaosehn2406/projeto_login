@@ -1,8 +1,9 @@
 package code.model.entity.User;
 
+import code.model.enums.TipoUsuario;
 import code.exception.PersistenciaException;
-import code.model.auth.PasswordCripto;
-import code.model.repository.UsuarioPadraoController;
+import code.service.auth.PasswordCriptoService;
+import code.service.persistencia.UsuarioPadraoController;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ public class UsuarioRoot {
         
         try {
             usuario.setUsuario("admin");
-            usuario.setSenha(PasswordCripto.hashSHA256("admin123"));
+            usuario.setSenha(PasswordCriptoService.hashSHA256("admin123"));
             usuario.setNome("admin");
             usuario.setEmail("admin@admin.com");
             usuario.setTipoUsuario(TipoUsuario.ADMIN);

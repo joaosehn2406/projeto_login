@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package code.model.auth;
+package code.service.auth;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author jpssa
  */
-public class PasswordCripto {
+public class PasswordCriptoService {
     
  
     public static String hashSHA256(String password) {

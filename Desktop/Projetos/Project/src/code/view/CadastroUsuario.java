@@ -5,11 +5,11 @@
 package code.view;
 
 import code.exception.PersistenciaException;
-import code.model.auth.AuthService;
-import code.model.auth.PasswordCripto;
-import code.model.entity.User.TipoUsuario;
+import code.service.auth.AuthService;
+import code.service.auth.PasswordCriptoService;
+import code.model.enums.TipoUsuario;
 import code.model.entity.User.UsuarioPadrao;
-import code.model.repository.UsuarioPadraoController;
+import code.service.persistencia.UsuarioPadraoController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -214,7 +214,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
             UsuarioPadrao usuario = new UsuarioPadrao();
 
             String username = tfUsuario.getText().trim();
-            String password = PasswordCripto.hashSHA256(tfSenha.getText().trim());
+            String password = PasswordCriptoService.hashSHA256(tfSenha.getText().trim());
             String nome = tfNome.getText().trim();
             String email = tfEmail.getText().trim();
             TipoUsuario selecionado = (TipoUsuario) cbTipoUsuario.getSelectedItem();

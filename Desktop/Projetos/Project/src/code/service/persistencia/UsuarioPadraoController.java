@@ -1,10 +1,10 @@
-package code.model.repository;
+package code.service.persistencia;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import code.exception.PersistenciaException;
-import code.model.entity.User.TipoUsuario;
+import code.model.enums.TipoUsuario;
 import code.model.entity.User.UsuarioPadrao;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -17,7 +17,7 @@ public class UsuarioPadraoController {
     public void save(List<UsuarioPadrao> users) throws PersistenciaException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (UsuarioPadrao user : users) {
-                bw.write(user.persistir());
+                bw.write(user.toCSV());
                 bw.newLine();
             }
         } catch (IOException e) {

@@ -8,7 +8,7 @@ package code.model.entity;
  *
  * @author jpssa
  */
-public interface Persi {
+public interface Serializavel {
     
-    public String persistir();
+    String toCSV();
 }

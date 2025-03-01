@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import code.exception.PersistenciaException;
-import code.model.auth.AuthService;
-import code.model.entity.User.TipoUsuario;
+import code.service.auth.AuthService;
+import code.model.enums.TipoUsuario;
 import code.model.entity.User.UsuarioPadrao;
 import code.model.entity.User.UsuarioRoot;
-import code.model.repository.UsuarioPadraoController;
+import code.service.persistencia.UsuarioPadraoController;
+import code.service.auth.UserValidationService;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 
@@ -171,7 +172,7 @@ public class LoginInicial extends javax.swing.JDialog {
             String usuario = tfUsuario.getText().trim();
             String senha = new String(tfSenha.getPassword()).trim();
 
-            if (AuthService.usuarioExistente(usuario, controller.FILE_PATH)) {
+            if (UserValidationService.usuarioExistente(usuario, controller.FILE_PATH)) {
 
                 if (AuthService.validarLogin(senha, usuario, controller.FILE_PATH)) {
 
@@ -209,12 +210,16 @@ public class LoginInicial extends javax.swing.JDialog {
 
             String usuarioAtual = tfUsuario.getText();
             
-            if(AuthService.validarTipoUsuario(usuarioAtual, controller.FILE_PATH)) {
+            if(UserValidationService.validarTipoUsuario(usuarioAtual, controller.FILE_PATH)) {
             
-                 CadastroUsuario cadastroUsuario = new CadastroUsuario(null, true);
+                CadastroUsuario cadastroUsuario = new CadastroUsuario(null, true);
                 cadastroUsuario.setLocationRelativeTo(this);
                 cadastroUsuario.setVisible(true);
                 
+            }
+            else {
+            
+                JOptionPane.showMessageDialog(null, "Usuário sem permissão.");
             }
             
     }//GEN-LAST:event_btCadastrarActionPerformed
