@@ -66,7 +66,6 @@ public class UsuarioPadrao implements Serializavel {
         this.user = user;
     }
 
-    @Override
     public String getSenha() {
         return senha;
     }
@@ -84,5 +83,5 @@ public class UsuarioPadrao implements Serializavel {
                !senha.isEmpty() &&
                !usuario.isEmpty() &&
                tp != null;
-    }
+    }  
 }

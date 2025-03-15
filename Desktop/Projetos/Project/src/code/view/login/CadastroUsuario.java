@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package code.view;
+package code.view.login;
 
 import code.exception.PersistenciaException;
 import code.service.auth.AuthService;
 import code.service.auth.PasswordCriptoService;
 import code.model.enums.TipoUsuario;
 import code.model.entity.User.UsuarioPadrao;
-import code.service.persistencia.UsuarioPadraoController;
+import code.service.controller.UsuarioPadraoController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -30,6 +30,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
     public CadastroUsuario(java.awt.Frame parent, boolean modal) {
         try {
             initComponents();
+            cbTipoUsuario.setModel(new DefaultComboBoxModel<>(TipoUsuario.values()));
             getContentPane().setBackground(java.awt.Color.WHITE);
             controller = new UsuarioPadraoController();
 
@@ -248,12 +249,6 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
     private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
         // TODO add your handling code here:
-
-        cbTipoUsuario.addItem(null);
-        for (TipoUsuario tipo : TipoUsuario.values()) {
-            cbTipoUsuario.addItem(tipo);
-        }
-        cbTipoUsuario.setSelectedItem(null);
     }//GEN-LAST:event_cbTipoUsuarioActionPerformed
 
     /**

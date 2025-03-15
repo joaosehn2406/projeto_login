@@ -3,7 +3,7 @@ package code.model.entity.User;
 import code.model.enums.TipoUsuario;
 import code.exception.PersistenciaException;
 import code.service.auth.PasswordCriptoService;
-import code.service.persistencia.UsuarioPadraoController;
+import code.service.controller.UsuarioPadraoController;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +22,6 @@ public class UsuarioRoot {
             usuario.setNome("admin");
             usuario.setEmail("admin@admin.com");
             usuario.setTipoUsuario(TipoUsuario.ADMIN);
-            usuario.setDt_criacao(UsuarioPadrao.sdf.parse("22/02/2025"));
 
 
             List<UsuarioPadrao> usuarios = new ArrayList<>();
@@ -32,7 +31,7 @@ public class UsuarioRoot {
             usuarioController.save(usuarios);
 
         
-        } catch (PersistenciaException | ParseException ex) {
+        } catch (PersistenciaException ex) {
             Logger.getLogger(UsuarioPadrao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

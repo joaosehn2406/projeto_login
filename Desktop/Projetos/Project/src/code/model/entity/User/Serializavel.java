@@ -5,6 +5,7 @@ import code.model.enums.TipoUsuario;
 import java.util.Date;
 
 public interface Serializavel {
+    
     Date getDt_criacao();
     String getNome();
     String getEmail();
@@ -12,7 +13,6 @@ public interface Serializavel {
     String getUsuario();
     String getSenha();
     
-
     default String toCSV() {
         return getUsuario() + "," +
                getSenha() + "," +
@@ -21,4 +21,5 @@ public interface Serializavel {
                getTipoUsuario() + "," +
                (getDt_criacao() != null ? UsuarioPadrao.sdf.format(getDt_criacao()) : ""); 
     }
+   
 }

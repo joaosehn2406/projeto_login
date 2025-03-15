@@ -1,4 +1,4 @@
-package code.service.persistencia;
+package code.service.controller;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class UsuarioPadraoController {
     public final static String FILE_PATH = "C:\\Temp\\usuarios.csv";
 
     public void save(List<UsuarioPadrao> users) throws PersistenciaException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             for (UsuarioPadrao user : users) {
                 bw.write(user.toCSV());
                 bw.newLine();
@@ -45,14 +45,11 @@ public class UsuarioPadraoController {
                 user.setNome(data[2]);
                 user.setEmail(data[3]);
                 user.setTipoUsuario(TipoUsuario.valueOf(data[4]));
-                user.setDt_criacao(UsuarioPadrao.sdf.parse(data[5]));
     
                 users.add(user);
             }
         } catch (IOException e) {
             throw new PersistenciaException("Erro ao ler o arquivo: " + e.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(UsuarioPadraoController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return users;

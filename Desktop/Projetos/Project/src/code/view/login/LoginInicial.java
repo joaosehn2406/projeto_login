@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package code.view;
+package code.view.login;
 
+import code.view.login.CadastroUsuario;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,10 @@ import code.service.auth.AuthService;
 import code.model.enums.TipoUsuario;
 import code.model.entity.User.UsuarioPadrao;
 import code.model.entity.User.UsuarioRoot;
-import code.service.persistencia.UsuarioPadraoController;
+import code.service.auth.PasswordCriptoService;
+import code.service.controller.UsuarioPadraoController;
 import code.service.auth.UserValidationService;
+import code.view.main.MainView;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 
@@ -35,7 +38,15 @@ public class LoginInicial extends javax.swing.JDialog {
 
         try {
             initComponents();
-            UsuarioRoot.criarUsuarioRoot();
+            
+            if (UserValidationService.usuarioExistente("admin", controller.FILE_PATH)) {
+                System.out.println("Usuario ja criado");
+            } 
+            else {
+                UsuarioRoot.criarUsuarioRoot();
+            }
+            
+            
             
             
             this.setLocationRelativeTo(null);
@@ -165,7 +176,6 @@ public class LoginInicial extends javax.swing.JDialog {
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         // TODO add your handling code here:
-
         try {
             
             
@@ -173,12 +183,24 @@ public class LoginInicial extends javax.swing.JDialog {
             String senha = new String(tfSenha.getPassword()).trim();
 
             if (UserValidationService.usuarioExistente(usuario, controller.FILE_PATH)) {
+                JOptionPane.showMessageDialog(null, "Autenticado!");
 
                 if (AuthService.validarLogin(senha, usuario, controller.FILE_PATH)) {
 
                     JOptionPane.showMessageDialog(null, "Bem vindo " + usuario + "!");
+                    MainView mainView = new MainView(null, true, usuario)     ;
+                    this.setVisible(false);
+                    mainView.setVisible(true);
+                    
                 }
-            } else {
+                else {
+                    JOptionPane.showMessageDialog(null, "Senha ou usuários incorretos");
+                    tfUsuario.setText("");
+                    tfSenha.setText("");
+                }
+               
+            } 
+            else {
 
                 int resposta = JOptionPane.showConfirmDialog(
                         this,
@@ -201,8 +223,7 @@ public class LoginInicial extends javax.swing.JDialog {
             
             e.printStackTrace();
         }
-        
-
+         
     }//GEN-LAST:event_btLoginActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
@@ -280,6 +301,10 @@ public class LoginInicial extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+    
+    public String getUsuarioDigitado(){
+        return tfUsuario.getText();
     }
     
  
