@@ -42,17 +42,17 @@ Para executar o projeto localmente, siga as instruções abaixo:
    - Uma IDE de sua preferência, como [IntelliJ IDEA](https://www.jetbrains.com/idea/) ou [Eclipse](https://www.eclipse.org/).
 
 2. **Clonando o Repositório:**
-   ```bash
+   
    git clone https://github.com/seu-usuario/projeto-login-autenticador.git
    cd projeto-login-autenticador
 
 3. **Compilando e Executando:**
 
-        Abra o projeto na sua IDE.
+   Abra o projeto na sua IDE.
 
-        Compile o projeto e execute a classe principal para iniciar a aplicação.
+   Compile o projeto e execute a classe principal para iniciar a aplicação.
 
-        Verifique se os arquivos .CSV para persistência dos dados estão no diretório correto ou ajuste o caminho conforme necessário.
+   Verifique se os arquivos .CSV para persistência dos dados estão no diretório correto ou ajuste o caminho conforme necessário.
 
 ## 🤝 Como Contribuir
 
@@ -62,22 +62,22 @@ Contribuições são sempre bem-vindas! Para colaborar com o projeto, siga estas
 
     2.Clone o repositório forkado para sua máquina:
 	
-	```bash
-git clone https://github.com/seu-usuario/projeto-login-autenticador.git
+
+	git clone https://github.com/seu-usuario/projeto-login-autenticador.git
 
     3.Crie uma nova branch para sua feature ou correção:
 
-	```bash
+
 git checkout -b minha-feature
 
     4.Realize as alterações necessárias e faça commit:
-	```bash
-git add .
-git commit -m "Descrição das alterações"
+
+	git add .
+	git commit -m "Descrição das alterações"
 
     5.Envie sua branch para o repositório remoto:
 	```bash
-    git push origin minha-feature
+	git push origin minha-feature
 
     6.Abra um Pull Request para que suas alterações sejam revisadas e integradas.
 
