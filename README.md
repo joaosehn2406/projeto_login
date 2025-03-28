@@ -58,28 +58,23 @@ Para executar o projeto localmente, siga as instruções abaixo:
 
 Contribuições são sempre bem-vindas! Para colaborar com o projeto, siga estas etapas:
 
-    1.Faça um fork do repositório.
+1. Faça um fork do repositório.
+2. Clone o repositório forkado para sua máquina:
+   ```bash
+   $ git clone https://github.com/seu-usuario/projeto-login-autenticador.git
 
-    2.Clone o repositório forkado para sua máquina:
-	
-	```bash
-	$ git clone https://github.com/seu-usuario/projeto-login-autenticador.git
+3.Crie uma nova branch para sua feature ou correção:
+   ```bash
+   $ git checkout -b minha-feature
 
-    3.Crie uma nova branch para sua feature ou correção:
+4.Realize as alterações necessárias e faça commit:
+   $ git add .
+   $ git commit -m "Descrição das alterações"
 
-	```bash
-	$ git checkout -b minha-feature
+5.Envie sua branch para o repositório remoto:
+   $ git push origin minha-feature
 
-    4.Realize as alterações necessárias e faça commit:
-	```bash
-	$ git add .
-	$ git commit -m "Descrição das alterações"
-
-    5.Envie sua branch para o repositório remoto:
-	```bash
-    $ git push origin minha-feature
-
-    6.Abra um Pull Request para que suas alterações sejam revisadas e integradas.
+6.Abra um Pull Request para que suas alterações sejam revisadas e integradas.
 
 ## 📄 Licença
 
