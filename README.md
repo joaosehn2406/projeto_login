@@ -1,21 +1,23 @@
 <h1 align="center">Projeto Login Autenticador</h1>
 
+
+
 <div align="center">
-  <strong>🚀 Projeto de Cadastro, Autenticação e Login de Usuários com Criptografia SHA-256 📚</strong>
+  <p>Um repositório que implementa o cadastro e autenticação de usuários utilizando criptografia SHA-256</p>
 </div>
 
 <div align="center">
-  <p>Um repositório que implementa o cadastro e autenticação de usuários utilizando criptografia SHA-256.</p>
-  <p>Explore, contribua e ajude a aprimorar a segurança e funcionalidade do sistema! 😄</p>
+  <p>Um repositório que implementa o cadastro e autenticação de usuários utilizando criptografia SHA-256</p>
+  <p>Explore, colabore e divirta-se! 😄</p>
 </div>
 
 ## 📖 Índice
 
-- [Visão Geral](#-visão-geral)
-- [Tecnologias](#-tecnologias)
-- [Configuração do Ambiente](#-configuração-do-ambiente)
-- [Como Contribuir](#-como-contribuir)
-- [Licença](#-licença)
+- [Visão Geral](#visão-geral)
+- [Tecnologias](#tecnologias)
+- [Configuração do Ambiente](#configuração-do-ambiente)
+- [Como Contribuir](#como-contribuir)
+- [Licença](#licença)
 
 ## 🔭 Visão Geral
 
@@ -35,7 +37,7 @@ Este projeto tem como objetivo oferecer um sistema simples e seguro de cadastro 
 
 ## ⚙️ Configuração do Ambiente
 
-Para executar o projeto localmente, siga as instruções abaixo:
+Forneça instruções claras e detalhadas sobre como configurar o ambiente de desenvolvimento localmente. Isso pode incluir:
 
 1. **Pré-requisitos:**
    - [Java JDK](https://www.oracle.com/java/technologies/downloads/) instalado (recomenda-se a versão 11 ou superior).
@@ -43,41 +45,46 @@ Para executar o projeto localmente, siga as instruções abaixo:
 
 2. **Clonando o Repositório:**
    ```bash
-   git clone https://github.com/seu-usuario/projeto-login-autenticador.git
+   git clone https://github.com/joaosehn2406/projeto_login.git
    cd projeto-login-autenticador
-
+   ```
 3. **Compilando e Executando:**
+   - Abra o projeto na sua IDE.
 
-        Abra o projeto na sua IDE.
+   - Compile o projeto e execute a classe principal para iniciar a aplicação
 
-        Compile o projeto e execute a classe principal para iniciar a aplicação.
-
-        Verifique se os arquivos .CSV para persistência dos dados estão no diretório correto ou ajuste o caminho conforme necessário.
+   - Verifique se os arquivos .CSV para persistência dos dados estão no diretório correto ou ajuste o caminho conforme necessário.
 
 ## 🤝 Como Contribuir
 
 Contribuições são sempre bem-vindas! Para colaborar com o projeto, siga estas etapas:
 
-1. Faça um fork do repositório.
-2. Clone o repositório forkado para sua máquina:
-   ```bash
-   $ git clone https://github.com/seu-usuario/projeto-login-autenticador.git
+1. Faça um fork do repositório e clone-o em sua máquina local.
 
-3.Crie uma nova branch para sua feature ou correção:
-   ```bash
-   $ git checkout -b minha-feature
-
-4.Realize as alterações necessárias e faça commit:
-   $ git add .
-   $ git commit -m "Descrição das alterações"
-
-5.Envie sua branch para o repositório remoto:
-   $ git push origin minha-feature
-
-6.Abra um Pull Request para que suas alterações sejam revisadas e integradas.
+2. Crie uma nova branch para suas modificações:
+   ```
+   git checkout -b minha-branch
+   ```
+3. Faça as modificações desejadas e adicione-as ao stage:
+   ```
+   git add .
+   ```
+4. Faça um commit das suas alterações:
+   ```
+   git commit -m "Minhas modificações"
+   ```
+5. Envie suas alterações para o repositório remoto:
+   ```
+   git push origin minha-branch
+   ```
+6. Abra um pull request para que suas modificações sejam revisadas e incorporadas ao projeto.
 
 ## 📄 Licença
 
 Este projeto está licenciado sob a [MIT License](https://mit-license.org/). Consulte o arquivo LICENSE para obter mais informações sobre os termos de uso.
 
 Divirta-se explorando e contribuindo para o projeto! Se tiver dúvidas ou sugestões, abra uma issue ou entre em contato. 🚀
+
+
+
+Aproveite o projeto e fique à vontade para personalizar este README de acordo com as necessidades do seu repositório. Divirta-se codificando! 🎉😄
