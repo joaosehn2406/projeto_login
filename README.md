@@ -13,11 +13,12 @@
 
 ## 📖 Índice
 
-- [Visão Geral](#visão-geral)
-- [Tecnologias](#tecnologias)
-- [Configuração do Ambiente](#configuração-do-ambiente)
-- [Como Contribuir](#como-contribuir)
-- [Licença](#licença)
+- [Visão Geral](#-visão-geral)
+- [Tecnologias](#-tecnologias)
+- [Configuração do Ambiente](#-configuração-do-ambiente)
+- [Como Contribuir](#-como-contribuir)
+- [Licença](#-licença)
+
 
 ## 🔭 Visão Geral
 
